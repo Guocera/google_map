@@ -12,6 +12,8 @@ $(function() {
     marker = new google.maps.Marker({
       position: myLatLng,
       map: map,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
       title: "Hello World!"
     });
   }
