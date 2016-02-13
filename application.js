@@ -1,5 +1,5 @@
+'use strict';
 $(function() {
-  var map;
   var marker;
   var myLatLng = {
     lat: -34.397,
@@ -8,28 +8,25 @@ $(function() {
 
   initializeAPI();
 
-  initializeMarker();
+  function initializeMarker(){
+    marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: "Hello World!"
+    })
+  }
 
+  function initializeAPI() {
+    var body = $("body");
+    var url = "https://maps.googleapis.com/maps/api/js?key=" +
+      config.mapsAPI + 
+      "&callback=initMap";
 
-
-
-function initializeMarker(){
-
-}
-
-function initializeAPI() {
-  var body = $("body");
-  body.append("<script async defer src='https://maps.googleapis.com/maps/api/js?key=" +
-    config.mapsAPI + 
-    "&callback=initMap'></script>");
-}
-
-function initMap() {
-  map = new google.maps.Map($("#map"), {
-    center: myLatLng,
-    zoom: 8
-  });
-}
+    $.getScript(url, function() {
+        initializeMarker();
+    });
+    
+  }
 
 });
 
